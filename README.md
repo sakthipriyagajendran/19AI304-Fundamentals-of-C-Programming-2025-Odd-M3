@@ -29,38 +29,28 @@ To formulate a C program to convert a decimal number into its binary equivalent 
    Stop
 # Program:
 #include <stdio.h>
-
+void bin(int n)
+{
+    if(n==0){
+        return;
+    } else {
+        bin(n/2);
+        printf("%d",n%2);
+    }
+}
 int main()
 {
-    int num=13, binary[32], i = 0;
-    scanf("%d", &num);
-
-    if (num == 0)
-    {
-        printf("Binary equivalent: 0\n");
-    }
-    else
-    {
-        while (num > 0)
-        {
-            binary[i] = num % 2;
-            num = num / 2;
-            i++;
-        }
-
-        printf("Binary equivalent: ");
-        for (i = i - 1; i >= 0; i--)
-        {
-            printf("%d", binary[i]);
-        }
-        printf("\n");
-    }
-
+    int num;
+    scanf("%d",&num);
+    printf("%d in decimal = ",num);
+    bin(num);
+    printf(" in binary\n");
     return 0;
+    
 }
-
 # Output:
-Binary equivalent: 1101
+<img width="1110" height="376" alt="image" src="https://github.com/user-attachments/assets/24cdd909-956d-44e5-8aa2-74f9e6a7ccdd" />
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
@@ -103,57 +93,69 @@ Thus, the program was implemented and executed successfully, and the required ou
 # Program:
 #include <stdio.h>
 
-int main() {
-    int m, n, i, j, k;
-    int flag = 0;
+int main()
+{
+    int n;
+    int a[10][10];
+    int i, j, k;
+    int min, colIndex;
+    int saddleRow = -1, saddleCol = -1, saddleValue;
 
-    printf("Enter number of rows and columns: ");
-    scanf("%d %d", &m, &n);
+    scanf("%d", &n);
 
-    int mat[m][n];
-
-    printf("Enter matrix elements:\n");
-    for (i = 0; i < m; i++)
+    for (i = 0; i < n; i++)
         for (j = 0; j < n; j++)
-            scanf("%d", &mat[i][j]);
+            scanf("%d", &a[i][j]);
 
-    for (i = 0; i < m; i++) {
-        int min = mat[i][0];
-        int col_index = 0;
-        for (j = 1; j < n; j++) {
-            if (mat[i][j] < min) {
-                min = mat[i][j];
-                col_index = j;
+    printf("The matrix is\n");
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+            printf("%d ", a[i][j]);
+        printf("\n");
+    }
+
+    for (i = 0; i < n; i++)
+    {
+        min = a[i][0];
+        colIndex = 0;
+
+        for (j = 1; j < n; j++)
+        {
+            if (a[i][j] <= min)   // IMPORTANT FIX
+            {
+                min = a[i][j];
+                colIndex = j;
             }
         }
-        int isSaddle = 1;
-        for (k = 0; k < m; k++) {
-            if (mat[k][col_index] > min) {
-                isSaddle = 0;
+
+        for (k = 0; k < n; k++)
+        {
+            if (a[k][colIndex] > min)
                 break;
-            }
         }
 
-        if (isSaddle) {
-            printf("Saddle point = %d at position (%d, %d)\n", min, i, col_index);
-            flag = 1;
+        if (k == n)
+        {
+            saddleRow = i;
+            saddleCol = colIndex;
+            saddleValue = min;
         }
     }
 
-    if (!flag)
-        printf("No saddle point exists in the matrix.\n");
+    if (saddleRow != -1)
+        printf("\nSaddle point (%d, %d) : %d", saddleRow, saddleCol, saddleValue);
+    else
+        printf("\nNo Saddle Point");
 
     return 0;
 }
 
 
+
 # Output:
-Enter number of rows and columns: 3 3
-Enter matrix elements:
-11 23 12
-45 14 17
-7  16  9
-Saddle point = 12 at position (0, 2)
+<img width="731" height="446" alt="image" src="https://github.com/user-attachments/assets/6d74fd3d-d478-43a5-8445-25d3e748b32e" />
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
@@ -213,8 +215,8 @@ int main()
 }
 
 # Output:
-Enter a string: Saveetha
-Reversed string: ahteevaS
+<img width="390" height="271" alt="image" src="https://github.com/user-attachments/assets/5a0896a2-1aae-4540-b0e3-41ef9a3dffdb" />
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
@@ -279,12 +281,8 @@ int main()
 }
 
 # Output:
-Enter a string: hello
-Character frequencies:
-h : 1
-e : 1
-l : 2
-o : 1
+<img width="431" height="450" alt="image" src="https://github.com/user-attachments/assets/87a611ad-b125-4e80-adf7-0e3c535d9e96" />
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
@@ -360,9 +358,8 @@ int main()
 }
 
 # Output:
-Enter a string: hello world hello saveetha world
-String with unique words:
-hello world saveetha
+<img width="552" height="278" alt="image" src="https://github.com/user-attachments/assets/0211fcdf-40da-4981-8efc-255f3efcc2db" />
+
 
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
